@@ -4,6 +4,14 @@ public class TrainingBot {
 
     private String name = "TrainingBot";
     private int health = 20;
+    private int maxHealth = 20;
+private int attackDamage = 1;
+private boolean hasMace = false;
+private boolean hasShield = false;
+private boolean hasElytra = false;
+private boolean sprinting = false;
+private boolean sneaking = false;
+private boolean blocking = false;
     private boolean spawned = false;
 
     public void spawn() {
