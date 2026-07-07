@@ -1,10 +1,12 @@
 package com.example.examplemod;
 
-import com.example.examplemod.bot.TrainingBot;
+import com.example.examplemod.bot.TrainingBotEntity;
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -20,21 +22,28 @@ public class ModCommands {
                 Commands.literal("spawnbot")
                         .executes(context -> {
 
-                            TrainingBot bot = new TrainingBot();
+                            ServerPlayer player = context.getSource().getPlayerOrException();
+                            ServerLevel level = player.serverLevel();
 
-                            bot.equipMace();
-                            bot.equipShield();
+                            TrainingBotEntity bot =
+                                    ModEntities.TRAINING_BOT.get().create(level);
 
-                            bot.spawn();
-                            bot.useMace();
-                            bot.useShield();
+                            if (bot != null) {
+                                bot.moveTo(
+                                        player.getX() + 2,
+                                        player.getY(),
+                                        player.getZ(),
+                                        player.getYRot(),
+                                        0
+                                );
 
-                            context.getSource().sendSuccess(
-                                    () -> Component.literal(
-                                            bot.getName() + " | HP: " + bot.getHealth()
-                                    ),
-                                    false
-                            );
+                                level.addFreshEntity(bot);
+
+                                context.getSource().sendSuccess(
+                                        () -> Component.literal("TrainingBot Spawned!"),
+                                        false
+                                );
+                            }
 
                             return 1;
                         })
