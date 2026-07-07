@@ -1,15 +1,20 @@
 package com.example.examplemod.bot;
 
-public class TrainingBotEntity {
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.level.Level;
 
-    private final TrainingBot bot;
+public class TrainingBotEntity extends PathfinderMob {
 
-    public TrainingBotEntity() {
-        this.bot = new TrainingBot();
+    private final TrainingBot bot = new TrainingBot();
+
+    public TrainingBotEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public void spawn() {
-        bot.spawn();
+    @Override
+    protected void registerGoals() {
+        super.registerGoals();
     }
 
     public TrainingBot getBot() {
