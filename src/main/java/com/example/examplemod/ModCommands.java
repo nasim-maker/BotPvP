@@ -22,6 +22,9 @@ public class ModCommands {
 
                             TrainingBot bot = new TrainingBot();
 
+                            bot.equipMace();
+                            bot.equipShield();
+
                             bot.spawn();
                             bot.useMace();
                             bot.useShield();
