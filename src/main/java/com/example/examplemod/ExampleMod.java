@@ -30,6 +30,8 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.example.examplemod.bot.TrainingBotEntity;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(ExampleMod.MODID)
@@ -108,7 +110,13 @@ public class ExampleMod {
             event.accept(EXAMPLE_BLOCK_ITEM);
         }
     }
-
+    @SubscribeEvent
+public void registerAttributes(EntityAttributeCreationEvent event) {
+    event.put(
+            ModEntities.TRAINING_BOT.get(),
+            TrainingBotEntity.createAttributes().build()
+    );
+}
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
