@@ -5,13 +5,25 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class TrainingBotEntity extends PathfinderMob {
 
     private final TrainingBot bot = new TrainingBot();
 
     public TrainingBotEntity(EntityType<? extends PathfinderMob> entityType, Level level) {
-        super(entityType, level);
+    super(entityType, level);
+
+    this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.MACE));
+    this.setItemSlot(EquipmentSlot.OFFHAND, new ItemStack(Items.SHIELD));
+
+    this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.NETHERITE_HELMET));
+    this.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.NETHERITE_CHESTPLATE));
+    this.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.NETHERITE_LEGGINGS));
+    this.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.NETHERITE_BOOTS));
+    }
     }
 
     @Override
