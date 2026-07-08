@@ -17,7 +17,7 @@ public class ModEntities {
             ENTITY_TYPES.register("training_bot",
                     () -> EntityType.Builder.of(
                             TrainingBotEntity::new,
-                            MobCategory.MISC
+                            MobCategory.MONSTER
                     ).sized(0.6F, 1.7F).build("training_bot"));
 
     public static void register(IEventBus bus) {
